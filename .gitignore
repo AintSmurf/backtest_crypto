@@ -1,0 +1,7 @@
+__pycache__/
+zip_files/
+data
+venv
+processed_data.csv
+backtest_results.csv
+extract_zip_file.py

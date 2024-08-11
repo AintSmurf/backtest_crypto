@@ -80,14 +80,17 @@ if __name__ == "__main__":
 ├── data/
 │   ├───15m/
 │   │    └── ETHUSDT-15m-2024-june.csv
-│   ├───1d
-│   ├───1h
-│   ├───30m
-│   └───4h
+│   │    └── BTCSDT-15m-2024-june.csv
+│   │
+│   ├───1d/
+│   ├───1h/
+│   ├───30m/
+│   └───4h/
 ├── helper.py
 ├── backtesting.py
 ├── download_data.py
 ├── app.py
 ├── README.md
 └── requirements.txt
+
 ```

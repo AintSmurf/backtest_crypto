@@ -54,7 +54,7 @@ When you run the download script, the data will automatically be saved in the ap
 * For 5-minute interval data, it will be saved under data/5m/
 * For 1-hour interval data, it will be saved under data/1h/
 * And so on..
-To download data that spans across months, for example from 01/08/2024 to the end of August, you need to provide the exact start date and use end_date + 2 (e.g., 02/09/2024) as the end date to ensure you capture the entire month.
+* To download data that spans across months, for example from 01/08/2024 to the end of August, you need to provide the exact start date and use end_date + 2 (e.g., 02/09/2024) as the end date to ensure you capture the entire month.
 
 # Usage
 * To perform a backtest, modify and run the app.py script:

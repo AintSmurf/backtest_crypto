@@ -1,6 +1,7 @@
 import requests
 import time
 import pandas as pd
+from helper import move_downloaded_file_to_required_folder, clean_and_save_data
 
 
 def get_historical_candles(symbol, interval, start_str, end_str):
@@ -64,11 +65,24 @@ def get_historical_candles(symbol, interval, start_str, end_str):
     df.to_csv(filename, index=False)
 
     print(f"Data saved to {filename} with {len(df)} rows.")
+    return filename
 
 
 if __name__ == "__main__":
     # Example usage
-    get_historical_candles("ETHUSDT", "15m", "01/06/2024", "01/07/2024")
+    symbol = "ADAUSDT"
+    interval = "5m"
+    start_str = "01/07/2024"
+    end_str = "02/08/2024"
+    # retrive data from binance api
+    file_path = get_historical_candles(symbol, interval, start_str, end_str)
+
+    # Clean the data
+    cleaned_file_path = clean_and_save_data(file_path, start_str, end_str)
+
+    # Move the cleaned file to the required folder
+    move_downloaded_file_to_required_folder(cleaned_file_path, symbol)
+
 
 # to check if downloaded data is legit with excel
 # =(((A2/1000)/60)/60)/24 + DATE(1970,1,1)

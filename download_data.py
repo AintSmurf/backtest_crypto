@@ -71,7 +71,7 @@ def get_historical_candles(symbol, interval, start_str, end_str):
 if __name__ == "__main__":
     # Example usage
     symbol = "ADAUSDT"
-    interval = "5m"
+    interval = "1m"
     start_str = "01/07/2024"
     end_str = "02/08/2024"
     # retrive data from binance api

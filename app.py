@@ -40,13 +40,13 @@ def process_data(csv_path):
 
 
 if __name__ == "__main__":
-    csv_path = get_data(symbol="ADAUSDT", timestamp="5m", year=2024, month="july")
+    csv_path = get_data(symbol="BTCUSDT", timestamp="1h", year=2024, month="july")
     df_updated = process_data(csv_path)
     initial_investment = 100
     # Initialize and run the backtest
     strategy = BacktestStrategy(
         df_updated,
-        tp_percent=5,
+        tp_percent=10,
         sl_percent=2.5,
         leverage=5,
         initial_margin=initial_investment,

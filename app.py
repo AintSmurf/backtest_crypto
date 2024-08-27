@@ -1,6 +1,8 @@
 import pandas as pd
 from helper import *
 from backtesting import BacktestStrategy
+from web_socket_utility import WebSocketHandler
+import time
 
 
 def process_data(csv_path):
@@ -40,29 +42,41 @@ def process_data(csv_path):
 
 
 if __name__ == "__main__":
-    csv_path = get_data(symbol="BTCUSDT", timestamp="1h", year=2024, month="july")
-    df_updated = process_data(csv_path)
-    initial_investment = 100
-    # Initialize and run the backtest
-    strategy = BacktestStrategy(
-        df_updated,
-        tp_percent=10,
-        sl_percent=2.5,
-        leverage=5,
-        initial_margin=initial_investment,
-    )
+    # Initialize the WebSocketHandler only once
+    ws_handler = WebSocketHandler()
 
-    # it will output the results to csv file
-    strategy.run_backtest()
+    # Subscribe to the desired symbol and interval
+    ws_handler.subscribe("btcusdt", interval="1m")
+    try:
+        while True:
+            time.sleep(1)
+            ws_handler.data_pulling_loop()
+    except KeyboardInterrupt:
+        ws_handler.stop()
+        print("WebSocket handler stopped.")
+    # csv_path = get_data(symbol="BTCUSDT", timestamp="5m", year=2024, month="july")
+    # df_updated = process_data(csv_path)
+    # initial_investment = 100
+    # # Initialize and run the backtest
+    # strategy = BacktestStrategy(
+    #     df_updated,
+    #     tp_percent=10,
+    #     sl_percent=2.5,
+    #     leverage=5,
+    #     initial_margin=initial_investment,
+    # )
 
-    # Calculate win rate
-    win_rate = strategy.calculate_win_rate()
-    print(f"\nWin Rate: {win_rate:.2f}%\n")
+    # # it will output the results to csv file
+    # strategy.run_backtest()
 
-    # Calculate total profit/loss based on  initial investment
-    total_profit_loss = strategy.calculate_total_profit_loss()
-    print(
-        f"Total Profit/Loss from {initial_investment} initial investment: ${total_profit_loss:.2f}"
-    )
-    # plot results
-    strategy.plot_results()
+    # # Calculate win rate
+    # win_rate = strategy.calculate_win_rate()
+    # print(f"\nWin Rate: {win_rate:.2f}%\n")
+
+    # # Calculate total profit/loss based on  initial investment
+    # total_profit_loss = strategy.calculate_total_profit_loss()
+    # print(
+    #     f"Total Profit/Loss from {initial_investment} initial investment: ${total_profit_loss:.2f}"
+    # )
+    # # plot results
+    # strategy.plot_results()

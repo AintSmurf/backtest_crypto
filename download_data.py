@@ -2,12 +2,13 @@ import requests
 import time
 import pandas as pd
 from helper import move_downloaded_file_to_required_folder, clean_and_save_data
+from configs.config import FUTURES, ENDPOINTS
 
 
 def get_historical_candles(symbol, interval, start_str, end_str):
     # real futures api not testnet if u wanna retrive testnet data use https://testnet.binancefuture.com
-    base_url = "https://fapi.binance.com"
-    endpoint = "/fapi/v1/klines"
+    base_url = FUTURES["base_url"]
+    endpoint = ENDPOINTS["hitorical_candle_enpoint"]
     url = base_url + endpoint
 
     start_ts = int(time.mktime(time.strptime(start_str, "%d/%m/%Y")) * 1000)

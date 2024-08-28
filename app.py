@@ -1,7 +1,7 @@
 import pandas as pd
-from helper import *
+from utilities.helper import *
 from backtesting import BacktestStrategy
-from web_socket_utility import WebSocketHandler
+from utilities.web_socket_utility import WebSocketHandler
 import time
 
 
@@ -56,6 +56,7 @@ if __name__ == "__main__":
     #     print("WebSocket handler stopped.")
 
     csv_path = get_data(symbol="BTCUSDT", timestamp="5m", year=2024, month="july")
+    print(csv_path)
     df_updated = process_data(csv_path)
     initial_investment = 100
     # Initialize and run the backtest

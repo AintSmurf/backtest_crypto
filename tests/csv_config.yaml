@@ -1,0 +1,25 @@
+test_cases:
+  - name: "5m BTCUSDT"
+    csv_path: "data/5m/BTCUSDT-5m-2024-July.csv"
+    tp_percent: 10
+    sl_percent: 5
+    leverage: 10
+    initial_margin: 100
+  - name: "15m BTCUSDT"
+    csv_path: "data/15m/BTCUSDT-15m-2024-July.csv"
+    tp_percent: 10
+    sl_percent: 5
+    leverage: 10
+    initial_margin: 100
+  - name: "1h BTCUSDT"
+    csv_path: "data/1h/BTCUSDT-1h-2024-July.csv"
+    tp_percent: 10
+    sl_percent: 5
+    leverage: 10
+    initial_margin: 100
+  - name: "1d BTCUSDT"
+    csv_path: "data/1d/BTCUSDT-1d-2024-July.csv"
+    tp_percent: 10
+    sl_percent: 5
+    leverage: 10
+    initial_margin: 100

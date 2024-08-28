@@ -6,38 +6,14 @@ from typing import Optional, Dict
 
 class BacktestStrategy:
     def __init__(
-        self, data, tp_percent: int, sl_percent: int, leverage: int, initial_margin: int
+        self,
+        data,
+        tp_percent: int,
+        sl_percent: int,
+        leverage: int,
+        initial_margin: int,
     ):
-        self.data = data
-        self.tp_percent = tp_percent / 100  # Convert to decimal
-        self.sl_percent = sl_percent / 100  # Convert to decimal
-        self.leverage = leverage  # Leverage factor (e.g., 10 for 10x leverage)
-        self.initial_margin = initial_margin  # Initial margin allocated per trade
-        self.maintenance_margin = 0.8  # Liquidation if margin falls below 80%
-        # Calculate EMA
-        self.data["EMA"] = ta.trend.EMAIndicator(
-            self.data["close"], window=200
-        ).ema_indicator()
-        # Calculate MACD
-        macd = ta.trend.MACD(self.data["close"])
-        self.data["MACD"] = macd.macd()
-        self.data["Signal_Line"] = macd.macd_signal()
-        # Calculate RSI
-        self.data["RSI"] = ta.momentum.RSIIndicator(self.data["close"], window=14).rsi()
-        # Drop rows with NaN values
-        self.data.dropna(inplace=True)
-
-
-import pandas as pd
-import ta
-import matplotlib.pyplot as plt
-from typing import Optional, Dict
-
-
-class BacktestStrategy:
-    def __init__(
-        self, data, tp_percent: int, sl_percent: int, leverage: int, initial_margin: int
-    ):
+        self.csv_path = getattr(data, "csv_path", "Unknown")
         self.data = data
         self.tp_percent = tp_percent / 100  # Convert to decimal
         self.sl_percent = sl_percent / 100  # Convert to decimal
@@ -213,7 +189,7 @@ class BacktestStrategy:
                     stop_loss_price = None  # Reset stop loss
                     take_profit_price = None  # Reset Take profit
                     # Save the results to a new CSV file
-        output_csv_path = "backtest_results.csv"
+        output_csv_path = f"backtest_results.csv"
         self.data.to_csv(output_csv_path, index=False)
 
     def plot_results(self):
